@@ -1,0 +1,21 @@
+name: default
+
+on: [push]
+
+jobs:
+    Test:
+      name: Test
+      runs-on: ubuntu-latest
+      steps:
+
+      - name: Check out code
+        uses: actions/checkout@v2.3.3
+
+      - name: Setup Node environment
+        uses: actions/setup-node@v2.1.4
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
