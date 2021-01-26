@@ -22,4 +22,4 @@ jobs:
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm publish . --tag ${GITHUB_REF#refs/*/}  --access public
+        run: npm publish .
