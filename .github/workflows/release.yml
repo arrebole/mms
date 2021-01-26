@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node environment
         uses: actions/setup-node@v2.1.4
         with:
-          node-version: latest
+          check-latest: true
           registry-url: 'https://npm.pkg.github.com'
           scope: '@octocat'
 
