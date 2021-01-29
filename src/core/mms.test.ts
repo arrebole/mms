@@ -18,7 +18,7 @@ describe('ZhongXun', () => {
         const text = '测试';
         const frames = [{ txt: Buffer.from(text) }];
 
-        const templateContent = await mms.buildTemplate(5, frames);
+        const templateContent = await mms.buildTemplateContent(5, frames);
         expect(templateContent).toEqual(`5,txt|${iconv.decode(Buffer.from(text), 'gb2312')}`);
     });
 
@@ -26,7 +26,7 @@ describe('ZhongXun', () => {
         const text = '测试';
         const frames = [{ txt: Buffer.from(text) }];
 
-        const templateContent = await mms.buildTemplate(5, frames);
+        const templateContent = await mms.buildTemplateContent(5, frames);
         const createTemplateResult = await mms.createTemplate('测试', templateContent);
 
         expect(createTemplateResult.taskId).toBeDefined();
@@ -38,7 +38,7 @@ describe('ZhongXun', () => {
         const text = '测试';
         const frames = [{ txt: Buffer.from(text) }];
 
-        const templateContent = await mms.buildTemplate(5, frames);
+        const templateContent = await mms.buildTemplateContent(5, frames);
         const createTemplateResult = await mms.createTemplate('测试', templateContent);
         const sendMMSResult = await mms.send(createTemplateResult.taskId, process.env.TEST_MOBILE);
 
