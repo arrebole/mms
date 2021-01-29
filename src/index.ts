@@ -2,3 +2,4 @@
 
 export * from './core/mms';
 export * from './platform/interface';
+export * from './platform/zhongxunrunda';

@@ -8,7 +8,7 @@ export class MMS {
     constructor(private platform: Platform) {}
 
     // 创建短信模板
-    async buildTemplate(duration: number, content: Frame[]) {
+    async buildTemplateContent(duration: number, content: Frame[]) {
         const templateContents = [duration.toString()];
         for (const frame of content) {
             // 一帧中可以包含媒体内容和纯文本
