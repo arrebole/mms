@@ -7,19 +7,32 @@ npm install @arrebole/mms
 
 # example
 ```javascript
-const { MMS, ZhongXunPlatform } = requir('@arrebole/mms');
+const { MultimediaMessage, ZhongXunPlatform } = requir('@arrebole/mms');
 
-const mms = new MMS(new ZhongXunPlatform({ appId, appKey }));
+const zhongXunPlatform = new ZhongXunPlatform({
+    appId: APPID,
+    appKey: TEST_APPKEY,
+});
 
 async function sendMMS() {
-    const templateTitle = 'test';
-    const templateContent = await mms.buildTemplateContent(5, frames);
+    const multimediaMessage = new MultimediaMessage({
+        title: '[upyun 测试]',
+        frames: [
+            {
+                duration: 5,
+                files: [{ mediaType: 'txt', media: Buffer.from('测试测试') }],
+            },
+        ],
+    });
 
     // create template
-    const createTemplateResult = await mms.createTemplate(templateTitle, templateContent);
+    const createTemplateResult = await zhongXunPlatform.create(multimediaMessage);
 
     // send message
-    const sendMMSResult = await mms.send(createTemplateResult.taskId, '181066XXXXX');
+    const sendMMSResult = await zhongXunPlatform.send({
+        templateId: createTemplateResult.taskId, 
+        phone: '181066XXXXX'
+    });
 }
 
 ```

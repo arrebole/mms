@@ -6,6 +6,11 @@ export interface SendMMSOptions {
     sendTime?: string;
 }
 
+export interface MMS {
+    title: string;
+    encode(): string;
+}
+
 export interface Response {
     status: string;
     message: string;
@@ -13,6 +18,6 @@ export interface Response {
 }
 
 export interface Platform {
-    createTemplate(title: string, content: string): Promise<Response>;
+    create(MMS): Promise<Response>;
     send(option: SendMMSOptions): Promise<Response>;
 }

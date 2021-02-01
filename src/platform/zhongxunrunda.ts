@@ -1,7 +1,7 @@
 // Copyright(c) 2021 arrebole
 
 import axios from 'axios';
-import { Platform, SendMMSOptions } from './interface';
+import { MMS, Platform, SendMMSOptions } from './interface';
 
 export class ZhongXunPlatform implements Platform {
     constructor(options: Record<'appId' | 'appKey', string> & Partial<Record<'sendUrl' | 'createUrl', string>>) {
@@ -43,7 +43,13 @@ export class ZhongXunPlatform implements Platform {
         );
     }
 
-    createTemplate(title: string, content: string) {
-        return this.post(this.apiUrl.create, this.makeFormDate({ title, content }));
+    create(mms: MMS) {
+        return this.post(
+            this.apiUrl.create,
+            this.makeFormDate({
+                title: mms.title,
+                content: mms.encode(),
+            }),
+        );
     }
 }

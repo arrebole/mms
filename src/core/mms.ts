@@ -1,35 +1,45 @@
 // Copyright(c) 2021 arrebole
 
-import { Platform } from '../platform/interface';
-import { Frame } from './interface';
 import * as iconv from 'iconv-lite';
+import { Frame } from './frame';
 
-export class MMS {
-    constructor(private platform: Platform) {}
-
-    // 创建短信模板
-    async buildTemplateContent(duration: number, content: Frame[]) {
-        const templateContents = [duration.toString()];
-        for (const frame of content) {
-            // 一帧中可以包含媒体内容和纯文本
-            const templateContent = [];
-            if (frame.media) {
-                templateContent.push(frame.mediaType + '|' + frame.media.toString('base64'));
-            }
-            if (frame.txt) {
-                templateContent.push('txt|' + iconv.decode(frame.txt, 'gb2312'));
-            }
-            templateContents.push(templateContent.join(','));
+export class MultimediaMessage {
+    constructor(options?: Partial<Record<'title', string> & Record<'frames', Frame[]>>) {
+        if (options?.title) {
+            this.title = options.title;
         }
-        return templateContents.join(',');
+
+        if (options?.frames) {
+            this.frams = options.frames;
+        } else {
+            this.frams = [];
+        }
     }
 
-    async createTemplate(title: string, content: string) {
-        return this.platform.createTemplate(title, content);
+    title: string;
+
+    frams: Frame[];
+
+    // 为媒体短信添加帧
+    add(...frames: Frame[]) {
+        this.frams.push(...frames);
+        return this;
     }
 
-    // 通过短信模板发送信息
-    send(templateId: string, phone: string, sendTime?: Date) {
-        return this.platform.send({ templateId, phone, sendTime: sendTime?.toISOString() });
+    // 将媒体短信编码为文本格式
+    encode(): string {
+        const result = [];
+        for (const frame of this.frams) {
+            const frameCtx = [frame.duration.toString()];
+            for (const file of frame.files) {
+                if (file.mediaType === 'txt') {
+                    frameCtx.push('txt|' + iconv.decode(file.media, 'gb2312'));
+                    continue;
+                }
+                frameCtx.push(file.mediaType + '|' + file.media.toString('base64'));
+            }
+            result.push(frameCtx.join(','));
+        }
+        return result.join(';') + ';';
     }
 }
