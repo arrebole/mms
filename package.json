@@ -1,8 +1,9 @@
 {
   "name": "@arrebole/mms",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "视频短信sdk",
   "main": "dist/index.js",
+  "files": [ "dist" ],
   "scripts": {
     "build": "tsc --project ./tsconfig.build.json",
     "test": "jest ./src",
