@@ -1,14 +1,14 @@
 // Copyright(c) 2021 arrebole
 
 import * as iconv from 'iconv-lite';
-import { MultimediaMessage, ZhongXunPlatform } from '../src';
+import { MultimediaMessage, RundaPlatform } from '../src';
 
-const zhongXunPlatform = new ZhongXunPlatform({
+const rundaPlatform = new RundaPlatform({
     appId: process.env.TEST_APPID,
     appKey: process.env.TEST_APPKEY,
 });
 
-describe('ZhongXun', () => {
+describe('runda', () => {
     test('buildTemplate', async () => {
         const multimediaMessage = new MultimediaMessage({
             title: '测试',
@@ -23,7 +23,7 @@ describe('ZhongXun', () => {
                 },
             ],
         });
-        expect(multimediaMessage.encode()).toEqual(
+        expect(multimediaMessage.content).toEqual(
             `5,txt|${iconv.decode(Buffer.from('测试测试'), 'gb2312')};`.repeat(2),
         );
     });
@@ -38,12 +38,12 @@ describe('ZhongXun', () => {
                 },
             ],
         });
-        const createTemplateResult = await zhongXunPlatform.create(multimediaMessage);
+        const createTemplateResult = await rundaPlatform.create(multimediaMessage);
         expect(createTemplateResult.taskId).not.toBeNull();
     });
 
     test('send', async () => {
-        const sendMMSResult = await zhongXunPlatform.send({
+        const sendMMSResult = await rundaPlatform.send({
             templateId: process.env.TEST_SMMID,
             phone: process.env.TEST_MOBILE,
         });

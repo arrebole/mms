@@ -8,7 +8,7 @@ export interface SendMMSOptions {
 
 export interface MMS {
     title: string;
-    encode(): string;
+    content: string;
 }
 
 export interface Response {

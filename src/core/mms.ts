@@ -27,7 +27,7 @@ export class MultimediaMessage {
     }
 
     // 将媒体短信编码为文本格式
-    encode(): string {
+    get content(): string {
         const result = [];
         for (const frame of this.frams) {
             const frameCtx = [frame.duration.toString()];

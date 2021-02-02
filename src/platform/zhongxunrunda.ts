@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { MMS, Platform, SendMMSOptions } from './interface';
 
-export class ZhongXunPlatform implements Platform {
+export class RundaPlatform implements Platform {
     constructor(options: Record<'appId' | 'appKey', string> & Partial<Record<'sendUrl' | 'createUrl', string>>) {
         this.secret = options;
         this.apiUrl = {
@@ -48,7 +48,7 @@ export class ZhongXunPlatform implements Platform {
             this.apiUrl.create,
             this.makeFormDate({
                 title: mms.title,
-                content: mms.encode(),
+                content: mms.content,
             }),
         );
     }

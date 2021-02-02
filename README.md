@@ -7,9 +7,9 @@ npm install @arrebole/mms
 
 # example
 ```javascript
-const { MultimediaMessage, ZhongXunPlatform } = requir('@arrebole/mms');
+const { MultimediaMessage, RundaPlatform } = requir('@arrebole/mms');
 
-const zhongXunPlatform = new ZhongXunPlatform({
+const rundaPlatform = new RundaPlatform({
     appId: APPID,
     appKey: TEST_APPKEY,
 });
@@ -26,10 +26,10 @@ async function sendMMS() {
     });
 
     // create template
-    const createTemplateResult = await zhongXunPlatform.create(multimediaMessage);
+    const createTemplateResult = await rundaPlatform.create(multimediaMessage);
 
     // send message
-    const sendMMSResult = await zhongXunPlatform.send({
+    const sendMMSResult = await rundaPlatform.send({
         templateId: createTemplateResult.taskId, 
         phone: '181066XXXXX'
     });
