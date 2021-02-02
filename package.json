@@ -1,6 +1,6 @@
 {
   "name": "@arrebole/mms",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "视频短信sdk",
   "main": "dist/index.js",
   "scripts": {
@@ -8,10 +8,6 @@
     "test": "jest ./src",
     "test:e2e": "jest ./test ./test/env-setup.ts",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/arrebole/mms.git"
   },
   "keywords": [],
   "author": "arrebole",
