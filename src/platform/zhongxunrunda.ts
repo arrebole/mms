@@ -8,7 +8,7 @@ export class RundaPlatform implements Platform {
         this.secret = options;
         this.apiUrl = {
             send: options.sendUrl ?? 'http://rcs.zhongxunrunda.com/mmsApi/2m/send',
-            create: options.createUrl ?? 'http://rcs.zhongxunrunda.com/mmsApi/create',
+            create: options.createUrl ?? 'http://rcs.zhongxunrunda.com/mmsApi/2m/create',
         };
     }
 
