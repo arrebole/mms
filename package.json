@@ -1,6 +1,6 @@
 {
   "name": "@arrebole/mms",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "视频短信sdk",
   "main": "dist/index.js",
   "files": [ "dist" ],
