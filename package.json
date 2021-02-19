@@ -1,11 +1,13 @@
 {
   "name": "@arrebole/mms",
-  "version": "0.4.9",
+  "version": "0.5.0",
   "description": "视频短信sdk",
-  "main": "dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm5/index.js",
+  "es2015": "./dist/esm/index.js",
   "files": [ "dist" ],
   "scripts": {
-    "build": "tsc --project ./tsconfig.build.json",
+    "build": "tsc --build ./tsconfig.cjs.json ./tsconfig.esm.json",
     "test": "jest ./src",
     "test:e2e": "jest ./test ./test/env-setup.ts",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix"
